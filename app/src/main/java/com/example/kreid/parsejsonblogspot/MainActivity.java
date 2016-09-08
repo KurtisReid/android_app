@@ -40,7 +40,7 @@ Get and post methods
  */
 public class MainActivity extends Activity {
     private static String urlString;
-    String TAG_type = "type";
+    String TAG_type = "school.name";
     String TAG_effect_on_distance = "effectOnDistance";
     String TAG_title = "title";
     String TAG_when = "when";
@@ -88,13 +88,12 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Log.i("mainActivity:", "button clicked");
+                Log.i("mainActivity:", "good button clicked");
                 Intent intent = new Intent(MainActivity.this, moreInfoActivity.class);
-                intent.putExtra(TAG_title, contactList.get(0).get(TAG_title));
-                intent.putExtra(TAG_where, contactList.get(0).get(TAG_where));
+
+
                 intent.putExtra(TAG_type, contactList.get(0).get(TAG_type));
-                intent.putExtra(TAG_contributes, contactList.get(0).get(TAG_contributes));
-                intent.putExtra(TAG_when, contactList.get(0).get(TAG_when));
+
 
                 startActivity(intent);
             }
@@ -106,12 +105,22 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 //starts another activity
                 Log.i("mainActivity:", "button clicked");
+                Log.i("mainActivity:", "good button clicked");
+                Intent intent = new Intent(MainActivity.this, moreInfoActivity.class);
+
+
+                intent.putExtra(TAG_type, contactList.get(0).get(TAG_type));
+
+
+                startActivity(intent);
+
+
 
 
                 //Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                 //startActivity(intent);
 
-                new putJson().execute();//post method
+                //new putJson().execute();//post method
             }
         });
 
@@ -119,8 +128,16 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //starts another activity
-                Log.i("mainActivity:", "button clicked");
-                Intent intent = new Intent(MainActivity.this, calender_and_location.class);
+    //            Log.i("mainActivity:", "loc_cal button clicked");
+  //              Intent intent = new Intent(MainActivity.this, calender_and_location.class);
+//                startActivity(intent);
+                Log.i("mainActivity:", "good button clicked");
+                Intent intent = new Intent(MainActivity.this, moreInfoActivity.class);
+
+
+                intent.putExtra(TAG_type, contactList.get(0).get(TAG_type));
+
+
                 startActivity(intent);
 
                 //new putJson().execute();//post method
@@ -184,9 +201,9 @@ public class MainActivity extends Activity {
         }
 
         protected void onPostExecute(String stream){
-            //TextView tv = (TextView) findViewById(R.id.tv);
+            TextView tv = (TextView) findViewById(R.id.tv);
             //TextView tv2 = (TextView) findViewById(R.id.tv2);
-            //tv.setText(stream);
+            tv.setText(stream);
             HashMap<String, String> contact = new HashMap<String, String>();
 
             //..........Process JSON DATA................
