@@ -64,7 +64,8 @@ public class MainActivity extends Activity {
 
 
 
-        urlString = "http://10.0.2.2:8081/OutputKnowledgeItemsGET/57757132a4c101ac1a883b35";
+        urlString = "http://10.0.2.2:8081/getSchoolPrice";
+        Log.i("mainActivity", "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         new ProcessJSON().execute(urlString); //get method
 
 
@@ -171,9 +172,11 @@ public class MainActivity extends Activity {
         protected String doInBackground(String... strings){
             String stream = null;
             String urlString = strings[0];
-
+            Log.i("MainActivity", "ProcessJSON!!!!!!!!!!!!!!!!!!!!!!!!");
             HTTPDataHandler hh = new HTTPDataHandler();
             stream = hh.GetHTTPData(urlString);
+
+            //Log.i("MainActivity", stream);
 
 
             // Return the data from specified url
