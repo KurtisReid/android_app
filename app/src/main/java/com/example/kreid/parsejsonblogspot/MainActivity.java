@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -51,7 +52,9 @@ public class MainActivity extends Activity {
     boolean test = false;
 
 
-    ArrayList<HashMap<String, String>> contactList;
+    ArrayList<HashMap<String, String>> contactList; // hashmap where we will store the incoming data
+
+    SimpleCursorAdapter mAdapter;
 
 
     @Override
@@ -74,6 +77,37 @@ public class MainActivity extends Activity {
                                    @Override
                                    public void onClick(View v) {
                                        new ProcessJSON().execute(urlString); //get method
+                                       //post info to list
+        /*
+        ListAdapter adapter = new SimpleAdapter(
+                MainActivity.this, contactList,
+                R.layout.list_item, new String[] { TAG_title, TAG_type,
+                TAG_where }, new int[] { R.id.name,
+                R.id.type, R.id.location });*/
+                                       Log.i("MainActivity HHHHHHHHHH", contactList.toString());
+
+                                       ListView myList=(ListView)findViewById(android.R.id.list);
+
+                                       myList.setAdapter(mAdapter);
+
+
+
+                                       //listens for list object to be clicked
+                                       myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                           @Override
+                                           public void onItemClick(AdapterView<?> parent, View view, int position,
+                                                                   long id) {
+                                               Log.i("mainActivity:", "good button clicked");
+                                               Intent intent = new Intent(MainActivity.this, moreInfoActivity.class);
+
+
+                                               intent.putExtra(TAG_type, contactList.get(0).get(TAG_type));
+
+
+                                               startActivity(intent);
+                                           }
+                                       });
+
                                    }
                                });
 
@@ -81,34 +115,6 @@ public class MainActivity extends Activity {
 
 
 
-        //post info to list
-        ListAdapter adapter = new SimpleAdapter(
-                MainActivity.this, contactList,
-                R.layout.list_item, new String[] { TAG_title, TAG_type,
-                TAG_where }, new int[] { R.id.name,
-                R.id.type, R.id.location });
-
-        final ListView myList=(ListView)findViewById(android.R.id.list);
-
-        myList.setAdapter(adapter);
-
-
-
-        //listens for list object to be clicked
-        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                Log.i("mainActivity:", "good button clicked");
-                Intent intent = new Intent(MainActivity.this, moreInfoActivity.class);
-
-
-                intent.putExtra(TAG_type, contactList.get(0).get(TAG_type));
-
-
-                startActivity(intent);
-            }
-        });
 
 
         /*btn.setOnClickListener(new View.OnClickListener() {
