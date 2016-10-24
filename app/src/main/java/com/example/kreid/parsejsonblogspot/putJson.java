@@ -24,17 +24,17 @@ public class putJson extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... strings) {
         try {
             String PostData = "'{\"AccountType\": \"flashline\",\"apikey\": \"8675309\", \"id\" : \"22\"}'";
-            URL url = new URL("http://10.0.2.2:8081/inputKnowledgeItemsPOST");
+            URL url = new URL("http://10.0.2.2:8081/getSchoolPrice");
             HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-            Log.i("MainActivity", "HttpURLConnection successful");
+            Log.i("PutJson", "HttpURLConnection successful");
             httpCon.setDoOutput(true);
             httpCon.setRequestMethod("POST");
-            Log.i("MainActivity","method = POST");
+            Log.i("PutJSON","method = POST");
             OutputStreamWriter out = new OutputStreamWriter(
                     httpCon.getOutputStream());
-            Log.i("MainActivity","outputStreamWriter");
+            Log.i("PutJson","outputStreamWriter");
             out.write(PostData);
-            Log.i("MainActivity","PostData Written");
+            Log.i("PutJson","PostData Written");
             out.close();
             httpCon.getInputStream();
         } catch (MalformedURLException e) {

@@ -40,6 +40,7 @@ Get and post methods
  */
 public class MainActivity extends Activity {
     private static String urlString;
+    private static String nameString;
     String TAG_type = "school.name";
     String TAG_effect_on_distance = "effectOnDistance";
     String TAG_title = "title";
@@ -47,6 +48,8 @@ public class MainActivity extends Activity {
     String TAG_institution = "institution";
     String TAG_where = "where";
     String TAG_contributes = "contributes";
+    boolean test = false;
+
 
     ArrayList<HashMap<String, String>> contactList;
 
@@ -60,13 +63,21 @@ public class MainActivity extends Activity {
         //final TextView tv = (TextView) findViewById(R.id.tv);
         //final TextView tv2 = (TextView) findViewById(R.id.tv2);
         Button btn = (Button) findViewById(R.id.btn);//GET
-        Button loc_cal = (Button) findViewById(R.id.loc_cal);//POST
+        //Button loc_cal = (Button) findViewById(R.id.loc_cal);//POST
 
 
 
         urlString = "http://10.0.2.2:8081/getSchoolPrice";
+        nameString = "http://10.0.2.2:8081/getSchoolName";
         Log.i("mainActivity", "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        new ProcessJSON().execute(urlString); //get method
+        btn.setOnClickListener(new View.OnClickListener() {
+                                   @Override
+                                   public void onClick(View v) {
+                                       new ProcessJSON().execute(urlString); //get method
+                                   }
+                               });
+
+        //new ProcessJSON().execute(nameString);
 
 
 
@@ -100,7 +111,7 @@ public class MainActivity extends Activity {
         });
 
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        /*btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //starts another activity
@@ -122,8 +133,8 @@ public class MainActivity extends Activity {
 
                 //new putJson().execute();//post method
             }
-        });
-
+        });*/
+/*
         loc_cal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,7 +155,7 @@ public class MainActivity extends Activity {
 
             }
         });
-
+*/
 
 
 
@@ -202,8 +213,10 @@ public class MainActivity extends Activity {
 
         protected void onPostExecute(String stream){
             TextView tv = (TextView) findViewById(R.id.tv);
-            //TextView tv2 = (TextView) findViewById(R.id.tv2);
-            tv.setText(stream);
+
+
+                tv.setText(stream);
+
             HashMap<String, String> contact = new HashMap<String, String>();
 
             //..........Process JSON DATA................
@@ -221,11 +234,17 @@ public class MainActivity extends Activity {
                     //Log.i("mainActivity", String.valueOf(i));
                     JSONObject object = reader.getJSONObject(i);
                     JSONArray object1;
+                        Log.i("mainActivity", "HELLO WHEREEVER YOU ARE");
+                        Log.i("mainActivity", object.toString());
 
 
                     //Log.i("mainActivity", "jsonObject waetherArray passed !!!!!!!!!!!!!!!!!!");
                     //JSONObject weather_object_0 = weatherArray.getJSONObject(1);
-                    arr[j] = object.getString(TAG_effect_on_distance);//finds the string
+                        tv.setText(object.getString("name"));
+                        Log.i("mainActivity", "HELLO WHEREEVER YOU ARE");
+                        Log.i("mainActivity",object.getString("school.name"));
+
+                    arr[j] = object.getString("school.name");//finds the string
                         contact.put(TAG_effect_on_distance, arr[j]);
                     Log.i("mainActivity", "effect_onDistance"+arr[j]);
 

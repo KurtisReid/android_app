@@ -36,19 +36,19 @@ public class moreInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Log.i("moreInfoActivity:", "Im here");
 
-        Log.i("moreInfoActivity:", intent.getExtras().get("type").toString());
+        //Log.i("moreInfoActivity:", intent.getExtras().get("type").toString());
 
-        TextView tv = (TextView) findViewById(R.id.institiution);
-        TextView title = (TextView) findViewById(R.id.title);
+       // TextView tv = (TextView) findViewById(R.id.institiution);
+       // TextView title = (TextView) findViewById(R.id.title);
         TextView type = (TextView) findViewById(R.id.type);
-        TextView location = (TextView) findViewById(R.id.location);
+        /*TextView location = (TextView) findViewById(R.id.location);
         TextView contributes = (TextView) findViewById(R.id.contributes);
 
         title.setText(intent.getExtras().get("title").toString());
         location.setText(intent.getExtras().get("where").toString());//prints intents
         tv.setText(intent.getExtras().get("when").toString());//prints intents
-        contributes.setText(intent.getExtras().get("contributes").toString());
-        type.setText(intent.getExtras().get("type").toString());
+        contributes.setText(intent.getExtras().get("contributes").toString());*/
+        //type.setText(intent.getExtras().get("school.tuition_revenue_per_fte").toString());
 
 
 
