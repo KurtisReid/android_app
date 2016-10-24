@@ -61,7 +61,11 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        HashMap<String, String> contact = new HashMap<String, String>();
         contactList = new ArrayList<HashMap<String, String>>();
+
+
+
 
         //final TextView tv = (TextView) findViewById(R.id.tv);
         //final TextView tv2 = (TextView) findViewById(R.id.tv2);
@@ -73,43 +77,51 @@ public class MainActivity extends Activity {
         urlString = "http://10.0.2.2:8081/getSchoolPrice";
         nameString = "http://10.0.2.2:8081/getSchoolName";
         Log.i("mainActivity", "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        btn.setOnClickListener(new View.OnClickListener() {
-                                   @Override
-                                   public void onClick(View v) {
-                                       new ProcessJSON().execute(urlString); //get method
-                                       //post info to list
-        /*
+        contact.put(TAG_title, "this is the title");
+        contactList.add(contact);
+
+        Log.i("MainActivity kkkkkkkk", contactList.toString());
+
         ListAdapter adapter = new SimpleAdapter(
                 MainActivity.this, contactList,
                 R.layout.list_item, new String[] { TAG_title, TAG_type,
                 TAG_where }, new int[] { R.id.name,
-                R.id.type, R.id.location });*/
-                                       Log.i("MainActivity HHHHHHHHHH", contactList.toString());
+                R.id.type, R.id.location });
 
-                                       ListView myList=(ListView)findViewById(android.R.id.list);
+        ListView myList=(ListView)findViewById(android.R.id.list);
 
-                                       myList.setAdapter(mAdapter);
-
+        myList.setAdapter(adapter);
 
 
-                                       //listens for list object to be clicked
-                                       myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                           @Override
-                                           public void onItemClick(AdapterView<?> parent, View view, int position,
-                                                                   long id) {
-                                               Log.i("mainActivity:", "good button clicked");
-                                               Intent intent = new Intent(MainActivity.this, moreInfoActivity.class);
+
+        //listens for list object to be clicked
+        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Log.i("mainActivity:", "good button clicked");
+                Intent intent = new Intent(MainActivity.this, moreInfoActivity.class);
 
 
-                                               intent.putExtra(TAG_type, contactList.get(0).get(TAG_type));
+                intent.putExtra(TAG_type, contactList.get(0).get(TAG_type));
 
 
-                                               startActivity(intent);
-                                           }
-                                       });
+                startActivity(intent);
+            }
+        });
+
+
+       /* btn.setOnClickListener(new View.OnClickListener() {
+                                   @Override
+                                   public void onClick(View v) {
+                                       new ProcessJSON().execute(urlString); //get method
+                                       //post info to list
+
+                                       //Log.i("MainActivity HHHHHHHHHH", contactList.toString());
+
 
                                    }
-                               });
+                               });*/
 
         //new ProcessJSON().execute(nameString);
 
@@ -225,6 +237,8 @@ public class MainActivity extends Activity {
 
             HashMap<String, String> contact = new HashMap<String, String>();
 
+
+
             //..........Process JSON DATA................
             if(stream !=null){
                 try {
@@ -280,6 +294,7 @@ public class MainActivity extends Activity {
 
 
                         contactList.add(contact);//adds to arraylist
+                        Log.i("MainActivity jjjj", contact.toString());
                         //tv.setText((CharSequence) contact.toString());
                         //Log.i("mainActivity:", "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
                         //Log.i("mainActivity:", contactList.get(0).get(TAG_title));
