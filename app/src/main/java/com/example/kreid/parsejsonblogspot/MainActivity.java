@@ -54,7 +54,6 @@ public class MainActivity extends Activity {
 
     ArrayList<HashMap<String, String>> contactList; // hashmap where we will store the incoming data
 
-    SimpleCursorAdapter mAdapter;
 
 
     @Override
@@ -77,10 +76,10 @@ public class MainActivity extends Activity {
         urlString = "http://10.0.2.2:8081/getSchoolPrice";
         nameString = "http://10.0.2.2:8081/getSchoolName";
         Log.i("mainActivity", "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        contact.put(TAG_title, "this is the title");
-        contactList.add(contact);
+        contact.put(TAG_title, "this is the title");// adds information to contact
+        contactList.add(contact);//puts contact into hashmap
 
-        Log.i("MainActivity kkkkkkkk", contactList.toString());
+        //Log.i("MainActivity kkkkkkkk", contactList.toString());
 
         ListAdapter adapter = new SimpleAdapter(
                 MainActivity.this, contactList,
@@ -101,7 +100,7 @@ public class MainActivity extends Activity {
                                     long id) {
                 Log.i("mainActivity:", "good button clicked");
                 Intent intent = new Intent(MainActivity.this, moreInfoActivity.class);
-
+                new ProcessJSON().execute(urlString); //get method
 
                 intent.putExtra(TAG_type, contactList.get(0).get(TAG_type));
 
@@ -240,7 +239,7 @@ public class MainActivity extends Activity {
 
 
             //..........Process JSON DATA................
-            if(stream !=null){
+            if(stream != null){
                 try {
                     // Get the full HTTP Data as JSONObject
 
@@ -340,6 +339,10 @@ public class MainActivity extends Activity {
                 }
 
             } // if statement end
+            else
+            {
+                Log.i("MainActivity", "Stream = null");
+            }
         }
 
 
